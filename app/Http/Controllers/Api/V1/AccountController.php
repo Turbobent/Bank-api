@@ -26,8 +26,7 @@ class AccountController extends Controller
         } else {
             $accounts = Account::where($queryItems)->paginate();
 
-            return new AccountCollection($customers->appends($request->query()));
-
+            return new AccountCollection($accounts->appends($request->query()));
         }
     }
 

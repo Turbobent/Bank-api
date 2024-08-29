@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class TransactionsFilter extends ApiFilter{
 
     protected $allowedParms = [
-        'customer_id'=>['eq'],
+        'customerId'=>['eq'],
         'amount'=>['eq', 'gt','lt','gte','lte'],
         'status'=>['eq','ne'],
         'to'=>['eq'],

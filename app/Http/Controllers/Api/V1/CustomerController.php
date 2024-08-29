@@ -20,17 +20,20 @@ class CustomerController extends Controller
     public function index(Request $request)
     {
         $filter = new CustomersFilter();
-        $queryItems = $filter->transform($request); //[['column', 'operator', 'value']]
+        $filterItems = $filter->transform($request); //[['column', 'operator', 'value']]
 
-        if(count($queryItems) == 0){
-            return new CustomerCollection(Customer::paginate());
-        } else {
+        $includeTransactions = $request->query('includeTransactions');
 
-              $customers = Customer::where($queryItems)->paginate();
+        $customers = Customer::where($filterItems);
 
-              return new CustomerCollection($customers->appends($request->query()));
+        if ($includeTransactions) {
+            $customers = $customers->with('transactions');
         }
+
+        return new CustomerCollection($customers->paginate()->appends($request->query()));
     }
+
+
 
     /**
      * Show the form for creating a new resource.

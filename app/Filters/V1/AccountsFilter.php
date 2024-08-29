@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 class AccountsFilter extends ApiFilter{
 
      protected $allowedParms = [
-        'customer_id'=>['eq'],
-        'account_number'=>['eq', 'gt','lt','gte','lte'],
-        'account_name'=>['eq'],
-        'amount_of_money'=>['eq'],
+        'customerId'=>['eq'],
+        'accountNumber'=>['eq', 'gt','lt','gte','lte'],
+        'accountName'=>['eq'],
+        'amountOfMoney'=>['eq'],
     ];
 
     protected $columMap = [

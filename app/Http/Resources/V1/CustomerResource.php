@@ -24,7 +24,7 @@ class CustomerResource extends JsonResource
             'city'=>$this->city,
             'postalCode'=>$this->postal_code,
             'phoneNumber'=>$this->phone_number,
-
+            'transactions' => TransactionResource::collection($this->whenLoaded('transactions')),
         ];
 
 

@@ -6,6 +6,9 @@ use App\Models\Transaction;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\V1\TransactionResource;
+use App\Http\Resources\V1\TransactionCollection;
+
 class TransactionController extends Controller
 {
     /**
@@ -13,7 +16,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
+        return new TransactionCollection(Transaction::paginate());
     }
 
     /**
@@ -37,7 +40,7 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-        //
+        return new TransactionResource($transaction);
     }
 
     /**

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('account_number');
             $table->string('account_name');
             $table->integer('amount_of_money');
-            $table->timestamps();
+
         });
     }
 

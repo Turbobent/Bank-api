@@ -6,7 +6,8 @@ use App\Models\Account;
 use App\Http\Requests\StoreAccountRequest;
 use App\Http\Requests\UpdateAccountRequest;
 use App\Http\Controllers\Controller;
-
+use App\Http\Resources\V1\AccountResource;
+use App\Http\Resources\V1\AccountCollection;
 class AccountController extends Controller
 {
     /**
@@ -14,7 +15,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        //
+        return new AccountCollection(Account::paginate());
     }
 
     /**
@@ -38,7 +39,7 @@ class AccountController extends Controller
      */
     public function show(Account $account)
     {
-        //
+       return new AccountResource($account);
     }
 
     /**

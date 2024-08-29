@@ -8,14 +8,27 @@ use App\Http\Requests\UpdateAccountRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\AccountResource;
 use App\Http\Resources\V1\AccountCollection;
+use App\Filters\V1\AccountsFilter;
+use Illuminate\Http\Request;
+
 class AccountController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return new AccountCollection(Account::paginate());
+        $filter = new AccountsFilter();
+        $queryItems = $filter->transform($request); //[['column', 'operator', 'value']]
+
+        if(count($queryItems) == 0){
+            return new AccountCollection(Account::paginate());
+        } else {
+            $accounts = Account::where($queryItems)->paginate();
+
+            return new AccountCollection($customers->appends($request->query()));
+
+        }
     }
 
     /**

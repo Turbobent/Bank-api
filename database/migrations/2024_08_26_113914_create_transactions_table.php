@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->integer('customer_id'); // Assuming this is a foreign key
-            $table->decimal('amount', 15, 2); // Storing amount as a decimal with precision
-            $table->enum('status', ['V', 'S', 'F']); // void sucess  failed
-            $table->unsignedBigInteger('to'); // Assuming these are foreign keys to accounts
+            $table->integer('customer_id');
+            $table->decimal('amount', 15, 2);
+            $table->enum('status', ['V', 'S', 'F']);
+            $table->unsignedBigInteger('to');
 
-            $table->timestamps(); // Includes 'created_at' and 'updated_at' columns
+            $table->timestamps();
         });
 
     }

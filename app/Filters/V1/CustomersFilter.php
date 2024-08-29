@@ -1,10 +1,10 @@
 <?php
-namespace App\Services\V1;
+namespace App\Filters\V1;
+use App\Filters\ApiFilter;
+use Illuminate\Http\Request;
 
-use Illuminate\Http\Requrest;
 
-
-class CustomerQuery{
+class CustomersFilter extends ApiFilter{
     protected $allowedParms = [
         'name'=>['eq'],
         'type'=>['eq'],
@@ -26,5 +26,4 @@ class CustomerQuery{
         'gte' => '>=',
         'lte' => '<=',
     ];
-
 }

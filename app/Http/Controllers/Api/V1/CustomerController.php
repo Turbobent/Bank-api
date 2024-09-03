@@ -23,6 +23,7 @@ class CustomerController extends Controller
         $filterItems = $filter->transform($request); //[['column', 'operator', 'value']]
 
         $includeTransactions = $request->query('includeTransactions');
+        $includeAccounts = $request->query('includeAccounts');
 
         $customers = Customer::where($filterItems);
 
@@ -30,18 +31,14 @@ class CustomerController extends Controller
             $customers = $customers->with('transactions');
         }
 
+        if ($includeAccounts) {
+            $customers = $customers->with('accounts');
+        }
+
         return new CustomerCollection($customers->paginate()->appends($request->query()));
     }
 
 
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -54,18 +51,21 @@ class CustomerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Customer $customer)
-    {
-        return new CustomerResource($customer);
+ public function show(Customer $customer)
+{
+    $includeTransactions = request()->query('includeTransactions');
+    $includeAccounts = request()->query('includeAccounts');
+
+    if ($includeTransactions) {
+        $customer->loadMissing('transactions');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Customer $customer)
-    {
-        //
+    if ($includeAccounts) {
+        $customer->loadMissing('accounts');
     }
+
+    return new CustomerResource($customer);
+}
 
     /**
      * Update the specified resource in storage.

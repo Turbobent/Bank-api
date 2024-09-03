@@ -20,7 +20,6 @@ class AccountResource extends JsonResource
             'accountNumber'=>$this->account_number,
             'accountName'=>$this->account_name,
             'amountOfMoney'=>$this->amount_of_money,
-            'time'=>$this->time,
         ];
     }
 }

@@ -27,8 +27,5 @@ class CustomerResource extends JsonResource
             'transactions' => TransactionResource::collection($this->whenLoaded('transactions')),
             'accounts' => AccountResource::collection($this->whenLoaded('accounts')),
         ];
-
-
-
     }
 }

@@ -11,5 +11,8 @@ Route::get('/user', function (Request $request) {
 Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], function() {
     Route::apiResource('customers', CustomerController::class);
     Route::apiResource('transactions', TransactionController::class);
+    Route::apiResource('payments', PaymentController::class);
     Route::apiResource('accounts', AccountController::class);
+
+    Route::Post('transactions/bulk', ['uses'=>'TransactionController@bulkStore']);
 });

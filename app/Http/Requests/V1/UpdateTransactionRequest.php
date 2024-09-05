@@ -11,8 +11,8 @@ class UpdateTransactionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
-    }
+        $user = $this->user();
+        return $user != null && $user->tokenCan('update');    }
 
     /**
      * Get the validation rules that apply to the request.

@@ -55,6 +55,7 @@ class CustomerController extends Controller
      {
         $includeTransactions = request()->query('includeTransactions');
         $includeAccounts = request()->query('includeAccounts');
+        $includePayments = request()->query('includePayments');
 
         if ($includeTransactions) {
            $customer->loadMissing('transactions');
@@ -63,6 +64,9 @@ class CustomerController extends Controller
         if ($includeAccounts) {
           $customer->loadMissing('accounts');
         }
+        if ($includePayments) {
+            $customer->loadMissing('payments');
+          }
 
         return new CustomerResource($customer);
      }

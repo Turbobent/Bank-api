@@ -14,7 +14,16 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        //
+        $filter = new PaymentFilter();
+        $queryItems = $filter->transform($request); //[['column', 'operator', 'value']]
+
+        if(count($queryItems) == 0){
+            return new PaymentCollection(Payment::paginate());
+        } else {
+            $payments = Payment::where($queryItems)->paginate();
+
+            return new PaymentCollection($payments->appends($request->query()));
+        }
     }
 
     /**
@@ -38,7 +47,8 @@ class PaymentController extends Controller
      */
     public function show(Payment $payment)
     {
-        //
+        return new PaymentResource($payment);
+
     }
 
     /**

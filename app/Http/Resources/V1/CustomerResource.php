@@ -26,6 +26,7 @@ class CustomerResource extends JsonResource
             'phoneNumber'=>$this->phone_number,
             'transactions' => TransactionResource::collection($this->whenLoaded('transactions')),
             'accounts' => AccountResource::collection($this->whenLoaded('accounts')),
+            'payments' => PaymentResource::collection($this->whenLoaded('payments')),
         ];
     }
 }

@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\V1;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
 
 class StorePaymentRequest extends FormRequest
 {
@@ -13,6 +15,7 @@ class StorePaymentRequest extends FormRequest
     {
         $user = $this->user();
         return $user != null && $user->tokenCan('create');
+
     }
 
     /**
@@ -23,7 +26,22 @@ class StorePaymentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'customer_id' =>['required'],
+            'status'=>['required', Rule::in(['P','B','V','p','b','v'])],
+            'to'=>['required'],
+            'recipient_account'=>['required'],
+            'amount'=>['required'],
+            'currency'=>['required'],
+            'payment_method'=>['required'],
+            'paid_at'=>['required'],
         ];
+    }
+
+    protected function prepareForValidation(){
+        $this->merge([
+            'paid_at' => $this->paidAt,
+            'payment_method' =>$this->paymentMethod,
+            'recipient_account' =>$this->recipientAccount
+        ]);
     }
 }

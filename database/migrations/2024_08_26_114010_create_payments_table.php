@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->integer('customer_id');
             $table->integer('to');
-            $table->string('recipient_account')->nullable(); // Account number of the recipient
-            $table->decimal('amount', 10, 2); // Adjust precision as needed
-            $table->string('currency', 3); // ISO 4217 currency codes
+            $table->string('recipient_account');
+            $table->decimal('amount', 10, 2);
+            $table->string('currency', 3);
             $table->string('payment_method');
             $table->string('transaction_id')->unique();
             $table->enum('status', ['P','B','V'] );

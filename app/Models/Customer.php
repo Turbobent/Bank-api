@@ -33,4 +33,14 @@ class Customer extends Model
     {
         return $this->hasMany(Transaction::class);
     }
+    
+    public function cards()
+    {
+        return $this->hasMany(Card::class);
+    }
+
+    public function loans()
+    {
+        return $this->hasMany(Loan::class);
+    }
 }

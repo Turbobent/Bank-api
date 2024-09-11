@@ -21,7 +21,7 @@ class PaymentResource extends JsonResource
             'recipientAccount'=>$this->recipient_account,
             'amount'=>$this->amount,
             'currency'=>$this->currency,
-            'paymentMethod'=>$this->amount_of_money,
+            'paymentMethod'=>$this->payment_method,
             'transactionId'=>$this->transaction_id,
             'status'=>$this->status,
             'paidAt'=>$this->paid_at,

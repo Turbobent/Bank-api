@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Loans;
 use App\Http\Requests\StoreLoansRequest;
 use App\Http\Requests\UpdateLoansRequest;
 
-class LoansController extends Controller
+class LoanController extends Controller
 {
     /**
      * Display a listing of the resource.

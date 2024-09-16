@@ -13,6 +13,8 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1','mi
     Route::apiResource('transactions', TransactionController::class);
     Route::apiResource('payments', PaymentController::class);
     Route::apiResource('accounts', AccountController::class);
+    Route::apiResource('cards', CardController::class);
+    Route::apiResource('loans', LoanController::class);
 
     Route::Post('transactions/bulk', ['uses'=>'TransactionController@bulkStore']);
 });

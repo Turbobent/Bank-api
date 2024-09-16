@@ -1,19 +1,33 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Cards;
-use App\Http\Requests\StoreCardsRequest;
-use App\Http\Requests\UpdateCardsRequest;
+use App\Http\Requests\StoreCardRequest; //need
+use App\Http\Requests\UpdateCardRequest; //need
+use App\Http\Controllers\Controller;
+use App\Http\Resources\V1\CardResource;
+use App\Http\Resources\V1\CardCollection;
+use App\Filters\V1\CardFilter;
+use Illuminate\Http\Request;
 
-class CardsController extends Controller
+class CardController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $filter = new CardsFilter();
+        $queryItems = $filter->transform($request); //[['column', 'operator', 'value']]
+
+        if(count($queryItems) == 0){
+            return new CardCollection(Account::paginate());
+        } else {
+            $cards = Card::where($queryItems)->paginate();
+
+            return new CardCollection($cards->appends($request->query()));
+        }
     }
 
     /**
@@ -35,9 +49,9 @@ class CardsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Cards $cards)
+    public function show(Card $card)
     {
-        //
+       return new CardResource($card);
     }
 
     /**

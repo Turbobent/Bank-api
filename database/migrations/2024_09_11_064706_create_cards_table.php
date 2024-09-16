@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('customer_id')->constrained()->onDelete('cascade'); // User who owns the card
             $table->string('card_number')->unique();
-            $table->enum('card_type', ['debit', 'credit']);
+            $table->enum('card_type', ['d', 'c']); //debit,credit
             $table->string('cvv');
             $table->date('expiration_date');
             $table->string('status')->default('active'); // E.g., active, blocked, expired
